@@ -1,0 +1,22 @@
+apiVersion: kpack.io/v1alpha1
+kind: Image
+metadata:
+  name: cats-service
+  namespace: kpack
+spec:
+  tag: gcr.io/airy-box-312910/cats-service
+  serviceAccount: kpack-bot
+  cacheSize: "1.5Gi" #Caching is optional,if not cache is disabled
+  builder:
+    name: booternetes-buil-booyah
+    kind: Builder
+  source:
+    git:
+      url: https://github.com/geokoshy89/cats-service-release.git
+      revision: release
+  buils: #optional
+    env:
+      - name: BP_OCI_TITLE
+        value: "Booternetes Cat Service"
+      - name: BP_OCI_SOURCE
+        value: "https://github.com/geokoshy89/cats-service-release.git"

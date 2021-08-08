@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base/
+
+namespace: prod
+namePrefix: prod-
+
+patchesStrategicMerge:
+  - patch-env.yaml
+commonLabels:
+  env: prod
+replicas:
+  - name: cat-service
+    count: 2
+
+configMapGenerator:
+  - name: catty-config
+    literals:
+      - KITTY=cat

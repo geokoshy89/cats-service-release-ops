@@ -1,0 +1,19 @@
+apiVersion: kpack.io/v1alpha1
+kind: Builder
+metadata:
+  name: booternetes-buil-booyah
+  namespace: kpack
+spec:
+  serviceAccount: kpack-bot
+  tag: gcr.io/airy-box-312910/booternetes-booyah
+  stack:
+    name: booterenetes-stack
+    kind: ClusterStack
+  store:
+    name: booterenetes-store
+    kind: ClusterStore
+  order:
+    - group:
+        - id: paketo-buildpacks/java
+    - group:
+        - id: paketo-buildpacks/nodejs
